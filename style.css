@@ -1,0 +1,58 @@
+*{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+
+}
+
+body{
+    background-color: black;
+    background-image: url(./assets/pexels-markus-spiske-1089438.jpg); 
+
+}
+
+
+h2{
+    display: inline;
+    font-size: 20px;
+}
+
+h1{
+    display: inline;
+    margin: 0 auto;
+}
+
+.header{
+    width:80vw;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    margin: 0 auto;
+}
+
+li{
+    font-size: 25px;
+    
+    margin:10px;
+}
+
+#content{
+    margin-top:50px;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+
+}
+
+#startButton{
+    width:100px;
+    height:50px;
+  
+    font-size: 20px;
+    border-radius: 10px;
+    display:inline;
+    margin: 0 auto;
+    background-color: blueviolet;
+    margin-top: 25px;
+}
