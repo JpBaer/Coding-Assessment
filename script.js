@@ -12,10 +12,11 @@ var allAnswers = [['have','make','def','var'],['if(x < 0){code here}', 'if x < 0
 var correctInput = [3,0];
 var timer = document.getElementById("timer");
 var startButton = document.querySelector('#startButton');
-var content = document.querySelector('#content')
+var content = document.querySelector('#content');
+var answers;
+
 
 // var question = document.querySelector('#question')
-
 var secondsLeft = 90;
 timer.textContent = secondsLeft; 
 
@@ -34,14 +35,30 @@ function setTime() {
 
   }, 1000);
 }
+//check answer function
+    //if answer is correct the index goes up (ie next question) and correct appears
+    //if answer is incorrect time is decreased      
+function checkAnswer(answer){
+    console.log('Hello');
+    answerIndex = answers.indexOf(answer);
+    if (answerIndex == correctInput[index]){
+        index = index + 1;
+        //Print correct under question
+        return
+    }
+   else {
+        secondsLeft = secondsLeft - 10;
+    }
+}
 
-
-
+//When button is clicked div contents are removed and populated with first question
 startButton.addEventListener('click', function(){
     setTime();
     //startButton.remove(); 
-    content.innerHTML = ""
 
+    //Removes initial content in content div
+    content.innerHTML = ""
+    //Creates Question header and answer list elements
     var question = document.createElement('h1');
     var list = document.createElement('ol');
     var ans1 = document.createElement('li');
@@ -57,25 +74,26 @@ startButton.addEventListener('click', function(){
 
 
 
-    for(var i = 0; i < questions.length; i++){
+    //Loop through all questions
   
+        //populate with question
         question.textContent = questions[index];
 
-        var answers = allAnswers[index];
+        answers = allAnswers[index];
        
-
+        //populate answers
         ans1.textContent =  answers[0];
         ans2.textContent =  answers[1];
         ans3.textContent =  answers[2];
         ans4.textContent =  answers[3];
 
-
-ans1.addEventListener
-       
-
-}
+        //Add event listener for click which calls check answer function
+        ans1.addEventListener("click",checkAnswer(answers[0]));
+        ans2.addEventListener("click",checkAnswer(answers[1]));
+        ans3.addEventListener("click",checkAnswer(answers[2]));
+        ans4.addEventListener("click",checkAnswer(answers[3]));
+    
     //question.textContent = 'Javascript question';
 
 });
 
- 
