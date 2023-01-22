@@ -11,6 +11,10 @@ body{
 
 }
 
+li{
+    cursor:pointer;
+}
+
 
 h2{
     display: inline;
@@ -40,7 +44,7 @@ li{
 #content{
     margin-top:50px;
     display:flex;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
 
 }
@@ -55,4 +59,12 @@ li{
     margin: 0 auto;
     background-color: blueviolet;
     margin-top: 25px;
+}
+
+#highScores{
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
 }
