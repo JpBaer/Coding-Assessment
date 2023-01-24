@@ -2,10 +2,12 @@
 //Create an array of questions and answers
     //Create an index variable 
         //if answer if chosen correctly index increases by 1 switching the question and answers
-        //if answer is chsoen incorrectly time decreases
+        //if answer is chosen incorrectly time decreases
     //Text must be removed and appended to html through javascript
 //After last answer is complete a pop up will be displayed asking for intials 
-//Initials and score will be stored in a highscores array which will be displayer when button is selected
+//Initials and score will be stored in a highscores array which will be displayed when button is selected
+
+
 var index = 0
 var questions = ['What is the main way to define a variable in Javascript?', 'Which is the proper syntax for an if statement?', 'How do you specify strict equality?', 'What is it called when events trigger other events (also known as bubbling)?'];
 var allAnswers = [['have','make','def','var'],['if(x < 0){code here}', 'if x < 0 {code here}', ' if {x < 0} (code here)','if x < 0: code here'],['==','===','!=','==!'],['Lifting','Multiply','Propogation','Generation']];
@@ -23,13 +25,26 @@ var ans3;
 var ans4;
 var user;
 
+//Pull previous scores and add values to an array of scores and users
+var scores = [];
+var users = [];
+var currentScores = JSON.parse(localStorage.getItem('score'))
+console.log(currentScores)
 
+//Prevents errors if nothing is in local storage
+ if (currentScores != null){
+     scores.push(currentScores.userscore);
+     users.push(currentScores.name);
+       }
 
+//set up timer
 var secondsLeft = 60;
 timer.textContent = secondsLeft; 
 
+//localStorage.clear();
 
 
+//Standard Timer Function
 function setTime() {
   // Sets interval in variable
   var timerInterval = setInterval(function() {
@@ -92,28 +107,27 @@ function checkAnswer(answer){
             var initials = window.prompt('Please enter your intials');
             
 
-            //Pull previously stored high score to compare with new store
-            var previousHighscore = JSON.parse(localStorage.getItem('score'));
-            previousHighscore = previousHighscore.userscore
+           
+            //adds new user and score onto existing arrays            
+             scores.push(score);
+             users.push(initials);
+            
+         //Creates an object with users name and score
+                 user = {
+                     name: users,
+                     userscore: scores
+                 };
 
-            if(score > userscore){
-                //Creates an object with users name and score
-                user = {
-                    name: initials,
-                    userscore: score
-                };
-
+            
                 //Stores the user object on local storage
-                localStorage.setItem("score", JSON.stringify(user));
-            }
-
-            secondsLeft = 0;
-            return
-        }
+            localStorage.setItem("score", JSON.stringify(user));
+            
+                }
+            
  
         index = index + 1;
         //Print correct under question
-        console.log('index is' + index);
+        //console.log('index is' + index);
         setText(index);
         return
     }
@@ -127,7 +141,7 @@ function checkAnswer(answer){
 
 //Function to populate text with new question and answers
 function setText(index){
-    console.log(questions);
+  
     //populate with question
     question.textContent = questions[index];
 
@@ -141,7 +155,7 @@ function setText(index){
 }
 
 
-
+//Main function to run when startbutton is pressed
 function start(){
     setTime();
     //startButton.remove(); 
@@ -183,25 +197,36 @@ startButton.addEventListener('click', function(){
 
 
 //When highscore button is clicked pulls high score from local storage and displays it
+
+        //Still need to create a sorting function to put high scores in order and limit to 3
+
 highscores.addEventListener('click',function(){
     content.innerHTML = ""
     list = document.createElement('ul');
-    var user1 = document.createElement('li');
- 
-
     content.appendChild(list);
-    list.appendChild(user1);
-  
-
+    //Pulls highscores out of local storage and splits into arrays
     user = JSON.parse(localStorage.getItem('score'));
+    users = user.name;
+    scores = user.userscore
     
-    user1.textContent = user.name + ' scored ' + user.userscore;
+    //goes through each highschore and prints
+    for(var i = 0; i < users.length; i++){
+        var userText = document.createElement('li');
+    
 
+        list.appendChild(userText);
+        
+        console.log(user[i])
+        userText.textContent = users[i] + ' scored ' + scores[i];
+    }
+
+    // Creates start button at bottom of highscores
     startButton = document.createElement('button');
     content.appendChild(startButton);
     startButton.textContent = 'Start';
     startButton.setAttribute('id','startButton')
     
+
     startButton.addEventListener('click', function(){
         secondsLeft = 60;
         index = 0;
