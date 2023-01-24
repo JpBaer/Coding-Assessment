@@ -32,8 +32,8 @@ THEN I can save my initials and my score
 ## Usage
 ```
 When the application is launched the initial webpage will be displayed.  Click the start button to begin the quiz.
+```
 
-
-![WebsiteScreenshot(.Coding-Assessment/assets/Screen Shot 2023-01-24 at 12.04.15 PM.png)
+![WebsiteScreenshot](./assets/Screen%20Shot%202023-01-24%20at%2012.04.15%20PM.png)
 
 Deployed Website: https://jpbaer.github.io/Coding-Assessment/
